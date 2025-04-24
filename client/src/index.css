@@ -160,22 +160,48 @@
 
 @keyframes floatup {
   0% {
-    transform: translateY(0) rotate(0deg);
+    transform: translateY(0) rotate(0deg) scale(0.8);
     opacity: 0;
   }
   10% {
     opacity: 1;
   }
+  50% {
+    transform: translateY(-40px) rotate(5deg) scale(1.1);
+    opacity: 0.9;
+  }
   80% {
-    opacity: 0.8;
+    opacity: 0.7;
   }
   100% {
-    transform: translateY(-80px) rotate(20deg);
+    transform: translateY(-120px) rotate(15deg) scale(0.9);
     opacity: 0;
   }
 }
 
 .music-bg {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M40 30C40 27.2386 42.2386 25 45 25V55C45 57.7614 42.7614 60 40 60C37.2386 60 35 57.7614 35 55V30C35 27.2386 37.2386 25 40 25' stroke='rgba(255,255,255,0.1)' stroke-width='2'/%3E%3Cpath d='M60 35C60 32.2386 62.2386 30 65 30V60C65 62.7614 62.7614 65 60 65C57.2386 65 55 62.7614 55 60V35C55 32.2386 57.2386 30 60 30' stroke='rgba(255,255,255,0.1)' stroke-width='2'/%3E%3Cpath d='M35 30H45' stroke='rgba(255,255,255,0.1)' stroke-width='2'/%3E%3Cpath d='M55 35H65' stroke='rgba(255,255,255,0.1)' stroke-width='2'/%3E%3Ccircle cx='35' cy='55' r='5' stroke='rgba(255,255,255,0.1)' stroke-width='2'/%3E%3Ccircle cx='55' cy='60' r='5' stroke='rgba(255,255,255,0.1)' stroke-width='2'/%3E%3C/svg%3E");
-  background-repeat: repeat;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(255, 20, 147, 0.15) 0%, rgba(255, 20, 147, 0) 30%),
+    radial-gradient(circle at 80% 30%, rgba(148, 0, 211, 0.15) 0%, rgba(148, 0, 211, 0) 30%),
+    radial-gradient(circle at 40% 70%, rgba(0, 191, 255, 0.15) 0%, rgba(0, 191, 255, 0) 30%),
+    radial-gradient(circle at 70% 80%, rgba(255, 215, 0, 0.15) 0%, rgba(255, 215, 0, 0) 30%);
+  
+  /* Musical patterns created with CSS */
+  background-image: 
+    /* Treble clef abstract */
+    radial-gradient(circle at 30% 40%, transparent 13%, rgba(255, 255, 255, 0.05) 13%, rgba(255, 255, 255, 0.05) 15%, transparent 15%),
+    radial-gradient(circle at 35% 50%, transparent 8%, rgba(255, 255, 255, 0.05) 8%, rgba(255, 255, 255, 0.05) 10%, transparent 10%),
+    radial-gradient(circle at 40% 60%, transparent 8%, rgba(255, 255, 255, 0.05) 8%, rgba(255, 255, 255, 0.05) 10%, transparent 10%),
+    /* Quarter note abstract */
+    radial-gradient(circle at 60% 35%, transparent 8%, rgba(255, 255, 255, 0.05) 8%, rgba(255, 255, 255, 0.05) 10%, transparent 10%),
+    radial-gradient(circle at 63% 25%, transparent 10%, rgba(255, 255, 255, 0.05) 10%, rgba(255, 255, 255, 0.05) 12%, transparent 12%),
+    /* Eigth note abstract */
+    radial-gradient(circle at 75% 65%, transparent 8%, rgba(255, 255, 255, 0.05) 8%, rgba(255, 255, 255, 0.05) 10%, transparent 10%),
+    radial-gradient(circle at 78% 55%, transparent 10%, rgba(255, 255, 255, 0.05) 10%, rgba(255, 255, 255, 0.05) 12%, transparent 12%);
+  
+  /* Staff lines */
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
 }

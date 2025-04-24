@@ -78,15 +78,15 @@ export default function VibeToggle({ initialState = false, onChange }: VibeToggl
     : "Vibe is off. Turn it on to get the party started!";
   
   return (
-    <div className={`relative p-10 ${isOn ? 'bg-gradient-to-br from-blue-900 to-purple-900' : 'bg-white'} rounded-xl shadow-xl transition-all duration-500 max-w-md w-full overflow-hidden`}>
+    <div className={`relative p-10 ${isOn ? 'bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900' : 'bg-white'} rounded-xl shadow-xl transition-all duration-500 max-w-md w-full overflow-hidden`}>
       {/* Musical background pattern when active */}
-      <div className={`absolute inset-0 music-bg opacity-0 transition-opacity duration-500 ${isOn ? 'opacity-20' : ''}`}></div>
+      <div className={`absolute inset-0 music-bg opacity-0 transition-opacity duration-500 ${isOn ? 'opacity-100' : ''}`}></div>
       
       {/* Animated musical notes when toggle is on */}
       <MusicalNotes isActive={isOn} />
       
-      <h2 className={`text-2xl font-bold mb-8 text-center transition-colors duration-300 
-        ${isOn ? 'text-white shadow-text-white' : 'text-gray-800'}`}>
+      <h2 className={`text-2xl font-bold mb-8 text-center transition-colors duration-500 
+        ${isOn ? 'text-white shadow-text-white rainbow-text' : 'text-gray-800'}`}>
         {isOn ? "TURN UP THE VIBE" : "Toggle the VIBE"}
       </h2>
       
@@ -100,11 +100,18 @@ export default function VibeToggle({ initialState = false, onChange }: VibeToggl
             aria-label="Toggle VIBE" 
             className="sr-only"
           />
+          
+          {/* Decorative music elements that appear when toggle is on */}
+          <div className={`absolute -top-8 -left-8 text-2xl transition-all duration-300 transform rotate-[-20deg] ${isOn ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`}>🎹</div>
+          <div className={`absolute -top-5 -right-6 text-2xl transition-all duration-300 transform rotate-[15deg] ${isOn ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`}>🎸</div>
+          <div className={`absolute -bottom-8 left-5 text-2xl transition-all duration-300 transform rotate-[10deg] ${isOn ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`}>🎷</div>
+          <div className={`absolute -bottom-6 -right-8 text-2xl transition-all duration-300 transform rotate-[-10deg] ${isOn ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`}>🥁</div>
+          
           <label 
             className={`
               toggle-container cursor-pointer w-[220px] h-[90px] block rounded-full relative transition-all duration-500
               ${isOn 
-                ? 'bg-gradient-to-r from-[#ff3a8c] to-[#b930ff] shadow-lg shadow-[#ff3a8c]/60 pulse-animation' 
+                ? 'bg-gradient-to-r from-[#ff3a8c] to-[#b930ff] shadow-lg shadow-[#ff3a8c]/60 pulse-animation border-2 border-pink-300/30' 
                 : 'bg-gradient-to-r from-[#3a3a5c] to-[#252541] shadow-lg shadow-black/20'}
             `}
             htmlFor="toggle-switch-checkbox"
@@ -134,16 +141,20 @@ export default function VibeToggle({ initialState = false, onChange }: VibeToggl
             
             {/* Toggle knob */}
             <span className={`
-              absolute top-[5px] left-[5px] w-[80px] h-[80px] bg-white rounded-full 
-              transition-all duration-500 ease-[cubic-bezier(.85,.05,.18,.95)]
-              shadow-lg
+              absolute top-[5px] left-[5px] w-[80px] h-[80px] rounded-full 
+              transition-all duration-500 ease-in-out
+              shadow-lg overflow-hidden
               ${isOn 
-                ? 'left-[calc(100%-5px)] -translate-x-full bg-gradient-to-br from-white to-pink-100' 
+                ? 'left-[calc(100%-5px)] -translate-x-full bg-gradient-to-br from-pink-300 via-white to-purple-300' 
                 : 'bg-white'}
             `}>
-              {/* Add a musical icon to the toggle knob when on */}
-              <span className={`absolute inset-0 flex items-center justify-center text-2xl
-                transition-all duration-300 ${isOn ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`}>
+              {/* Background pattern on toggle knob when on */}
+              <span className={`absolute inset-0 opacity-0 transition-opacity duration-300 ${isOn ? 'opacity-40' : ''}`} 
+                    style={{background: 'radial-gradient(circle at center, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%)'}}></span>
+              
+              {/* Musical icon on the toggle knob when on */}
+              <span className={`absolute inset-0 flex items-center justify-center text-3xl
+                transition-all duration-300 ${isOn ? 'opacity-100 scale-100 animate-[beat_1s_infinite_ease-in-out]' : 'opacity-0 scale-0'}`}>
                 🎵
               </span>
             </span>
