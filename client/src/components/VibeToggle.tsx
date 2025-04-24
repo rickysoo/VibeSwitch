@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import MusicalNotes from "./MusicalNotes";
+import MusicPlayer from "./MusicPlayer";
 
 interface VibeToggleProps {
   initialState?: boolean;
@@ -81,6 +82,9 @@ export default function VibeToggle({ initialState = false, onChange }: VibeToggl
     <div className={`relative p-10 ${isOn ? 'bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900' : 'bg-white'} rounded-xl shadow-xl transition-all duration-500 max-w-md w-full overflow-hidden`}>
       {/* Musical background pattern when active */}
       <div className={`absolute inset-0 music-bg opacity-0 transition-opacity duration-500 ${isOn ? 'opacity-100' : ''}`}></div>
+      
+      {/* Background music player */}
+      <MusicPlayer isPlaying={isOn} />
       
       {/* Animated musical notes when toggle is on */}
       <MusicalNotes isActive={isOn} />
