@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400" fill="none">
+  <!-- Musical Notes with color variations -->
+  <g opacity="0.15">
+    <!-- Quarter note -->
+    <path d="M100 80C100 77.2386 102.239 75 105 75V160C105 162.761 102.761 165 100 165C97.2386 165 95 162.761 95 160V80C95 77.2386 97.2386 75 100 75" stroke="url(#paint1)" stroke-width="3"/>
+    <path d="M95 80H105" stroke="url(#paint2)" stroke-width="3"/>
+    <circle cx="95" cy="160" r="10" stroke="url(#paint3)" stroke-width="3"/>
+    
+    <!-- Eighth note -->
+    <path d="M160 100C160 97.2386 162.239 95 165 95V180C165 182.761 162.761 185 160 185C157.239 185 155 182.761 155 180V100C155 97.2386 157.239 95 160 95" stroke="url(#paint4)" stroke-width="3"/>
+    <path d="M155 100H165" stroke="url(#paint5)" stroke-width="3"/>
+    <circle cx="155" cy="180" r="10" stroke="url(#paint6)" stroke-width="3"/>
+    <path d="M165 95C175 95 185 105 185 115" stroke="url(#paint7)" stroke-width="3" stroke-linecap="round"/>
+
+    <!-- Music clef abstract -->
+    <path d="M240 120C240 90 260 70 280 70C300 70 320 90 320 120C320 150 300 170 280 170" stroke="url(#paint8)" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="280" cy="200" r="15" stroke="url(#paint9)" stroke-width="3"/>
+    <circle cx="280" cy="250" r="10" stroke="url(#paint10)" stroke-width="3"/>
+
+    <!-- Music staff lines -->
+    <line x1="50" y1="300" x2="350" y2="300" stroke="url(#paint11)" stroke-width="2" opacity="0.2"/>
+    <line x1="50" y1="320" x2="350" y2="320" stroke="url(#paint12)" stroke-width="2" opacity="0.2"/>
+    <line x1="50" y1="340" x2="350" y2="340" stroke="url(#paint13)" stroke-width="2" opacity="0.2"/>
+    <line x1="50" y1="360" x2="350" y2="360" stroke="url(#paint14)" stroke-width="2" opacity="0.2"/>
+    <line x1="50" y1="380" x2="350" y2="380" stroke="url(#paint15)" stroke-width="2" opacity="0.2"/>
+  </g>
+
+  <!-- Gradients -->
+  <defs>
+    <linearGradient id="paint1" x1="95" y1="75" x2="105" y2="165" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF1493"/>
+      <stop offset="1" stop-color="#9370DB"/>
+    </linearGradient>
+    <linearGradient id="paint2" x1="95" y1="80" x2="105" y2="80" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF1493"/>
+      <stop offset="1" stop-color="#9370DB"/>
+    </linearGradient>
+    <radialGradient id="paint3" cx="95" cy="160" r="10" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF1493"/>
+      <stop offset="1" stop-color="#9370DB"/>
+    </radialGradient>
+    <linearGradient id="paint4" x1="155" y1="95" x2="165" y2="185" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF4500"/>
+      <stop offset="1" stop-color="#1E90FF"/>
+    </linearGradient>
+    <linearGradient id="paint5" x1="155" y1="100" x2="165" y2="100" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF4500"/>
+      <stop offset="1" stop-color="#1E90FF"/>
+    </linearGradient>
+    <radialGradient id="paint6" cx="155" cy="180" r="10" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF4500"/>
+      <stop offset="1" stop-color="#1E90FF"/>
+    </radialGradient>
+    <linearGradient id="paint7" x1="165" y1="95" x2="185" y2="115" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF4500"/>
+      <stop offset="1" stop-color="#1E90FF"/>
+    </linearGradient>
+    <linearGradient id="paint8" x1="240" y1="70" x2="320" y2="170" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFD700"/>
+      <stop offset="1" stop-color="#32CD32"/>
+    </linearGradient>
+    <radialGradient id="paint9" cx="280" cy="200" r="15" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFD700"/>
+      <stop offset="1" stop-color="#32CD32"/>
+    </radialGradient>
+    <radialGradient id="paint10" cx="280" cy="250" r="10" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFD700"/>
+      <stop offset="1" stop-color="#32CD32"/>
+    </radialGradient>
+    <linearGradient id="paint11" x1="50" y1="300" x2="350" y2="300" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF1493"/>
+      <stop offset="0.5" stop-color="#FFD700"/>
+      <stop offset="1" stop-color="#1E90FF"/>
+    </linearGradient>
+    <linearGradient id="paint12" x1="50" y1="320" x2="350" y2="320" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF1493"/>
+      <stop offset="0.5" stop-color="#FFD700"/>
+      <stop offset="1" stop-color="#1E90FF"/>
+    </linearGradient>
+    <linearGradient id="paint13" x1="50" y1="340" x2="350" y2="340" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF1493"/>
+      <stop offset="0.5" stop-color="#FFD700"/>
+      <stop offset="1" stop-color="#1E90FF"/>
+    </linearGradient>
+    <linearGradient id="paint14" x1="50" y1="360" x2="350" y2="360" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF1493"/>
+      <stop offset="0.5" stop-color="#FFD700"/>
+      <stop offset="1" stop-color="#1E90FF"/>
+    </linearGradient>
+    <linearGradient id="paint15" x1="50" y1="380" x2="350" y2="380" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF1493"/>
+      <stop offset="0.5" stop-color="#FFD700"/>
+      <stop offset="1" stop-color="#1E90FF"/>
+    </linearGradient>
+  </defs>
+</svg>

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import MusicalNotes from "./MusicalNotes";
 
 interface VibeToggleProps {
   initialState?: boolean;
@@ -7,22 +8,87 @@ interface VibeToggleProps {
 
 export default function VibeToggle({ initialState = false, onChange }: VibeToggleProps) {
   const [isOn, setIsOn] = useState(initialState);
+  const [playSound, setPlaySound] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  
+  useEffect(() => {
+    // Create audio element for sound effects
+    if (!audioRef.current) {
+      audioRef.current = new Audio();
+      audioRef.current.volume = 0.4;
+    }
+    
+    // Play different sounds based on toggle state
+    if (playSound) {
+      if (isOn) {
+        // Play activation sound - using a frequency to create a synth sound
+        const context = new (window.AudioContext || (window as any).webkitAudioContext)();
+        const oscillator = context.createOscillator();
+        const gainNode = context.createGain();
+        
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(440, context.currentTime); // A4 note
+        oscillator.frequency.exponentialRampToValueAtTime(880, context.currentTime + 0.3); // Up to A5
+        
+        gainNode.gain.setValueAtTime(0.3, context.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, context.currentTime + 0.5);
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(context.destination);
+        
+        oscillator.start();
+        oscillator.stop(context.currentTime + 0.5);
+      } else {
+        // Play deactivation sound - descending tone
+        const context = new (window.AudioContext || (window as any).webkitAudioContext)();
+        const oscillator = context.createOscillator();
+        const gainNode = context.createGain();
+        
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(660, context.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(220, context.currentTime + 0.3);
+        
+        gainNode.gain.setValueAtTime(0.3, context.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, context.currentTime + 0.5);
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(context.destination);
+        
+        oscillator.start();
+        oscillator.stop(context.currentTime + 0.5);
+      }
+      
+      // Reset sound trigger
+      setPlaySound(false);
+    }
+  }, [playSound, isOn]);
   
   const handleToggle = () => {
     const newState = !isOn;
     setIsOn(newState);
+    setPlaySound(true); // Trigger sound effect
+    
     if (onChange) {
       onChange(newState);
     }
   };
   
   const statusMessage = isOn
-    ? "Vibe mode activated! Feel the energy!"
+    ? "VIBE mode activated! Feel the beat! 🎶"
     : "Vibe is off. Turn it on to get the party started!";
   
   return (
-    <div className="relative p-8 bg-white rounded-xl shadow-xl">
-      <h2 className="text-xl font-bold text-gray-800 mb-6 text-center">Toggle the VIBE</h2>
+    <div className={`relative p-10 ${isOn ? 'bg-gradient-to-br from-blue-900 to-purple-900' : 'bg-white'} rounded-xl shadow-xl transition-all duration-500 max-w-md w-full overflow-hidden`}>
+      {/* Musical background pattern when active */}
+      <div className={`absolute inset-0 music-bg opacity-0 transition-opacity duration-500 ${isOn ? 'opacity-20' : ''}`}></div>
+      
+      {/* Animated musical notes when toggle is on */}
+      <MusicalNotes isActive={isOn} />
+      
+      <h2 className={`text-2xl font-bold mb-8 text-center transition-colors duration-300 
+        ${isOn ? 'text-white shadow-text-white' : 'text-gray-800'}`}>
+        {isOn ? "TURN UP THE VIBE" : "Toggle the VIBE"}
+      </h2>
       
       <div className="flex justify-center">
         <div className="relative">
@@ -36,41 +102,57 @@ export default function VibeToggle({ initialState = false, onChange }: VibeToggl
           />
           <label 
             className={`
-              toggle-container cursor-pointer w-[200px] h-[80px] block rounded-full relative transition-all duration-300
-              ${isOn ? 'bg-gradient-to-r from-[#ff3a8c] to-[#b930ff] shadow-lg shadow-[#ff3a8c]/40' : 'bg-gradient-to-r from-[#3a3a5c] to-[#252541] shadow-lg shadow-black/20'}
+              toggle-container cursor-pointer w-[220px] h-[90px] block rounded-full relative transition-all duration-500
+              ${isOn 
+                ? 'bg-gradient-to-r from-[#ff3a8c] to-[#b930ff] shadow-lg shadow-[#ff3a8c]/60 pulse-animation' 
+                : 'bg-gradient-to-r from-[#3a3a5c] to-[#252541] shadow-lg shadow-black/20'}
             `}
             htmlFor="toggle-switch-checkbox"
           >
-            <div className={`vibe-glow absolute top-1/2 left-1/2 w-[160px] h-[60px] -translate-x-1/2 -translate-y-1/2 rounded-[30px] 
-              bg-radial-gradient transition-opacity duration-500 ease-in-out
-              ${isOn ? 'opacity-100 animate-pulse-slow' : 'opacity-0'}`}>
+            {/* Glow effect behind the toggle */}
+            <div className={`vibe-glow absolute top-1/2 left-1/2 w-[200px] h-[70px] -translate-x-1/2 -translate-y-1/2 rounded-[35px] 
+              bg-radial-gradient transition-all duration-500 ease-in-out
+              ${isOn ? 'opacity-100 animate-[pulse-glow_1.5s_infinite_ease-in-out]' : 'opacity-0'}`}>
             </div>
             
-            <div className={`vibe-text vibe-off absolute w-full text-center font-bold tracking-wider transition-all duration-300 
-              left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white/30 text-[20px]
+            {/* VIBE text when off */}
+            <div className={`vibe-text vibe-off absolute w-full text-center font-bold tracking-wider transition-all duration-500 
+              left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white/40 text-[26px]
               ${isOn ? 'scale-0 opacity-0' : 'scale-100 opacity-100'}`}>
               VIBE
             </div>
             
-            <div className={`vibe-text vibe-on absolute w-full text-center font-bold tracking-wider transition-all duration-300 
-              left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-[24px] shadow-text-white
+            {/* VIBE text when on - with rainbow animation */}
+            <div className={`vibe-text vibe-on absolute w-full text-center font-bold tracking-wider transition-all duration-500 
+              left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-[30px] shadow-text-white
               ${isOn ? 'scale-100 opacity-100' : 'scale-0 opacity-0'}`}>
-              <span className={`vibe-letter inline-block transition-all duration-200 ${isOn ? 'animate-[wave_1s_infinite_0s]' : ''}`}>V</span>
-              <span className={`vibe-letter inline-block transition-all duration-200 ${isOn ? 'animate-[wave_1s_infinite_0.1s]' : ''}`}>I</span>
-              <span className={`vibe-letter inline-block transition-all duration-200 ${isOn ? 'animate-[wave_1s_infinite_0.2s]' : ''}`}>B</span>
-              <span className={`vibe-letter inline-block transition-all duration-200 ${isOn ? 'animate-[wave_1s_infinite_0.3s]' : ''}`}>E</span>
+              <span className={`vibe-letter inline-block transition-all duration-300 ${isOn ? 'animate-[wave_0.7s_infinite_0s] rainbow-text' : ''}`}>V</span>
+              <span className={`vibe-letter inline-block transition-all duration-300 ${isOn ? 'animate-[wave_0.7s_infinite_0.1s] rainbow-text' : ''}`}>I</span>
+              <span className={`vibe-letter inline-block transition-all duration-300 ${isOn ? 'animate-[wave_0.7s_infinite_0.2s] rainbow-text' : ''}`}>B</span>
+              <span className={`vibe-letter inline-block transition-all duration-300 ${isOn ? 'animate-[wave_0.7s_infinite_0.3s] rainbow-text' : ''}`}>E</span>
             </div>
             
+            {/* Toggle knob */}
             <span className={`
-              absolute top-[5px] left-[5px] w-[70px] h-[70px] bg-white rounded-full transition-all duration-300 ease-[cubic-bezier(.85,.05,.18,.95)]
-              shadow-md
-              ${isOn ? 'left-[calc(100%-5px)] -translate-x-full' : ''}
-            `}></span>
+              absolute top-[5px] left-[5px] w-[80px] h-[80px] bg-white rounded-full 
+              transition-all duration-500 ease-[cubic-bezier(.85,.05,.18,.95)]
+              shadow-lg
+              ${isOn 
+                ? 'left-[calc(100%-5px)] -translate-x-full bg-gradient-to-br from-white to-pink-100' 
+                : 'bg-white'}
+            `}>
+              {/* Add a musical icon to the toggle knob when on */}
+              <span className={`absolute inset-0 flex items-center justify-center text-2xl
+                transition-all duration-300 ${isOn ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`}>
+                🎵
+              </span>
+            </span>
           </label>
         </div>
       </div>
       
-      <div className={`mt-6 text-center text-sm ${isOn ? 'font-bold text-purple-600' : 'text-gray-500'}`}>
+      <div className={`mt-8 text-center text-base font-medium transition-all duration-300
+        ${isOn ? 'text-pink-300 animate-[dance_2s_infinite_ease-in-out]' : 'text-gray-500'}`}>
         {statusMessage}
       </div>
     </div>
